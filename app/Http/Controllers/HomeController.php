@@ -38,7 +38,8 @@ class HomeController extends Controller
                 $request->user()->addresses()->create([
                     'original_address' => $request->address,
                     'translated_address' => $translation['translated_address'],
-                    'country_code' => $request->country_code
+                    // 'country_code' => $request->country_code
+                    'country_code' => 'ja'
                 ]);
             }
 
