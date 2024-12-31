@@ -46,7 +46,8 @@ class HomeController extends Controller
             return view('home', [
                 'original_address' => $request->address,
                 'translated_address' => $translation['translated_address'],
-                'country_code' => $request->country_code
+                // 'country_code' => $request->country_code
+                'country_code' => 'ja'
             ]);
         } catch (\Exception $e) {
             return back()
