@@ -78,24 +78,6 @@ jobs:
           docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO }}/${{ env.APP_NAME }}:${{ github.sha }}
           docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO }}/${{ env.APP_NAME }}:latest
 
-      - name: Set up MySQL Client
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y mysql-client
-
-      - name: Create Database and User
-        run: |
-          mysql -h${{ secrets.DB_HOST }} \
-                -u${{ secrets.DB_ROOT_USER }} \
-                -p${{ secrets.DB_ROOT_PASSWORD }} \
-                --ssl-mode=REQUIRED \
-                -e "
-            CREATE DATABASE IF NOT EXISTS ${{ secrets.DB_DATABASE }};
-            CREATE USER IF NOT EXISTS '${{ secrets.DB_USERNAME }}'@'%' IDENTIFIED BY '${{ secrets.DB_PASSWORD }}';
-            GRANT ALL PRIVILEGES ON ${{ secrets.DB_DATABASE }}.* TO '${{ secrets.DB_USERNAME }}'@'%';
-            FLUSH PRIVILEGES;
-          "
-
       - name: Deploy to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
         with:
