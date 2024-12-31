@@ -88,7 +88,7 @@ jobs:
           service: ${{ env.APP_NAME }}
           region: ${{ env.REGION }}
           image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO }}/${{ env.APP_NAME }}:${{ github.sha }}
-          flags: '--quiet --allow-unauthenticated --port=8080 --add-cloudsql-instances=learn-devops-445406:us-central1:apphop-db'
+          flags: '--quiet --allow-unauthenticated --port=8080'
           env_vars: |
             DB_HOST=${{ secrets.DB_HOST }}
             DB_DATABASE=${{ secrets.DB_DATABASE }}
