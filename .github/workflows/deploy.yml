@@ -90,7 +90,6 @@ jobs:
           image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO }}/${{ env.APP_NAME }}:${{ github.sha }}
           flags: "--quiet --allow-unauthenticated --port=8080 --add-cloudsql-instances=${{ secrets.CLOUD_SQL_INSTANCE }}"
           env_vars: |
-            GOOGLE_CLOUD_PROJECT=${{ env.PROJECT_ID }}
             DB_HOST=${{ secrets.DB_HOST }}
             DB_DATABASE=${{ secrets.DB_DATABASE }}
             DB_USERNAME=${{ secrets.DB_USERNAME }}
