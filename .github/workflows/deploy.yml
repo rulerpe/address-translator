@@ -88,17 +88,16 @@ jobs:
           service: ${{ env.APP_NAME }}
           region: ${{ env.REGION }}
           image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO }}/${{ env.APP_NAME }}:${{ github.sha }}
-          flags: >-
-            --quiet
-            --allow-unauthenticated 
-            --port=8080 
-            --add-cloudsql-instances ${{ secrets.CLOUD_SQL_INSTANCE }}
-            update-env-vars: |
-              GOOGLE_CLOUD_PROJECT=${{ env.PROJECT_ID }}
-              DB_HOST=${{ secrets.DB_HOST }}
-              DB_DATABASE=${{ secrets.DB_DATABASE }}
-              DB_USERNAME=${{ secrets.DB_USERNAME }}
-              DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+          allow-unauthenticated: true
+          port: 8080
+          add-cloudsql-instances: ${{ secrets.CLOUD_SQL_INSTANCE }}
+          update-env-vars: |
+            GOOGLE_CLOUD_PROJECT=${{ env.PROJECT_ID }}
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_DATABASE=${{ secrets.DB_DATABASE }}
+            DB_USERNAME=${{ secrets.DB_USERNAME }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+          args: --quiet
 
       - name: Show Output URL
         run: |
